@@ -1,2 +1,2 @@
 # js-tic-tac-toe
- Quick test of myself
+ Quick test of myself(in terms of, can I methodically finish?)
