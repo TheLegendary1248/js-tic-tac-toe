@@ -1,8 +1,58 @@
+:root {
+    --cell-size: 100px;
+    --primary: #ffffff;
+    font-family: Tahoma;
+}
+html {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+
+}
+body {
+    background-color: #111;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+}
 main {
+    --grid-size-x: 3;
+    --grid-size-y: 3;
     position: fixed;
     top: 50%;
     left: 50%;
-    width: 200px;
-    height: 200px;
-    background-color: red;
+    translate: -50% -50%;
+    width: calc(var(--grid-size-x) * var(--cell-size));
+    height: calc(var(--grid-size-y) * var(--cell-size));
+    border-radius: 5px;
+}
+.square {
+    transition: all 0.5s;
+    background-color: #ddd4;
+    position: absolute;
+    box-sizing: border-box;
+    border: #0008 2px solid;
+    border-radius: 5px;
+    width: calc(var(--cell-size) - 2px);
+    height: calc(var(--cell-size) - 2px);
+    left: calc(var(--x) * var(--cell-size));
+    top: calc(var(--y) * var(--cell-size));
+    scale: 1;
+    z-index: 0;
+    box-shadow: #1113 5px 5px 0px;
+    font-size: var(--cell-size);
+    text-align: center;
+    padding-bottom: 20px;
+    text-shadow: #2222 50% 50% 2px;
+    line-height: 0.9em;
+    text-shadow: #222 .05em .05em 0;
+}
+.square:hover, .square:focus{
+    background-color: #dddf;
+    border-width: 0px;
+    outline: #000 4px solid;
+    outline-offset: 12px;
+    scale: 1.1;
+    z-index: 10;
 }

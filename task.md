@@ -11,4 +11,7 @@
 - [x] Turn logic
 - [ ] Check for win condition local to given changed squares
 
-## UI
+## UI STRUCTURE
+- [x] Centered grid
+- [ ] Information, such as Time Elasped
+
