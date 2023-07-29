@@ -9,7 +9,7 @@
 ## BASE GAME LOGIC
 - [x] Internally Represent Board
 - [x] Turn logic
-- [ ] Check for win condition local to given changed squares
+- [x] Check for win condition local to given changed squares
 
 ## UI STRUCTURE
 - [x] Centered grid
