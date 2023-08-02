@@ -3,10 +3,16 @@
     <link rel="stylesheet" href="style.css">
     <script src="code.js" defer></script>
 </head>
-<template id="cellTemp"><div class="square" style="--x: 0; --y:0" tabindex="0"></div></template>
+<template id="cellTemp">
+    <div class="square" style="--x: 0; --y:0" tabindex="0" placeholder=" "></div>
+</template>
 <body>
+    <div id="game-setup"></div>
+    <div id="prefs"></div>
+    <div id="win-screen">WINNER</div>
     <main>
         <div id="grid">
         </div>
+        
     </main>
 </body>

@@ -4,8 +4,9 @@ document.addEventListener("keydown", function onEvent(event) {
     console.log(event.key)
 });
 
-playerPieces = [" ", "X", "O"];
-selectables = "■□▢▣▤▥▦▧▨▩▪▫▬▭▮▯▰▱▲△▴▵▶▷▸▹►▻▼▽▾▿◀◁◂◃◄◅◆◇◈◉◊○◌◍◎●◐◑◒◓◔◕◖◗◘◙◚◛◜◝◞◟◠◡◢◣◤◥◦◧◨◩◪◫◬◭◮◯◰◱◲◳◴◵◶◷◸◹◺◻◼◽◾◿"
+let wscreen = document.getElementById("win-screen")
+let playerPieces = [" ", "X", "O"];
+let selectables = "■□▢▣▤▥▦▧▨▩▪▫▬▭▮▯▰▱▲△▴▵▶▷▸▹►▻▼▽▾▿◀◁◂◃◄◅◆◇◈◉◊○◌◍◎●◐◑◒◓◔◕◖◗◘◙◚◛◜◝◞◟◠◡◢◣◤◥◦◧◨◩◪◫◬◭◮◯◰◱◲◳◴◵◶◷◸◹◺◻◼◽◾◿"
 //The containing class for a game
 class Game {
     grid = [[0,0,0],[0,0,0],[0,0,0],[0,0,0]]
@@ -17,7 +18,7 @@ class Game {
     rowRequire = 3;
     turnCount = 0;
     PlacePiece(x,y) {
-        if (this.GetPiece(x,y) !== 0) console.log("Board already has a piece there");
+        if (this.GetPiece(x,y) !== 0) throw new Error("Board already has a piece there");
         //Place piece
         this.SetPiece(x,y,this.player)
         //Turn
@@ -25,14 +26,15 @@ class Game {
         else this.player++;
         let rows = this.CheckForContinousRows(x,y)
         for (let i = 0; i < rows.length; i++) {
-            if(rows[i] >= this.rowRequire) {console.log("WINNER"); break;}
+            if(rows[i] >= this.rowRequire) {wscreen.style.display = "block"}
         }
         console.log(this.grid)
+        return { piece: this.pieces[this.player] }
     };
 
     GetPiece(x,y) { return this.grid[x][y]}
     SetPiece(x,y,num) {this.grid[x][y] = num;}
-    //Checks f
+    //Checks for rows in all directions
     CheckForContinousRows(x,y)
     {
         let playerNum = this.GetPiece(x,y)
@@ -75,15 +77,27 @@ class Game {
 function inRange(lower,value,higher) { return (lower < value) & (value < higher) }
 let gridElement = document.getElementById("grid");
 let cellTemplate = document.getElementById("cellTemp")
+//Creates cells
 for (let xCell = 0; xCell < 3; xCell++) {
     for (let yCell = 0; yCell < 3; yCell++) {
-        //console.log(cellTemplate.children)
+        /** @type {HTMLElement} */
         let clone = cellTemplate.content.firstElementChild.cloneNode(true)
+        clone.onclick = (e) => TileClick(e, {x: xCell, y: yCell})
         clone.style.setProperty('--x', xCell)
         clone.style.setProperty('--y', yCell)
-        console.log(clone)
         gridElement.appendChild(clone)
     }
 }
+/** 
+* @param {MouseEvent} event 
+*/
+function TileClick(event, coord) {
 
+    console.log(coord, event)
+    /** @type {HTMLDivElement}*/
+    let eventTarget = event.target
+    eventTarget.textContent = mainGame.PlacePiece(coord.x, coord.y).piece
+    eventTarget.blur()
+    eventTarget.classList.add("filled")
+}
 let mainGame = new Game()

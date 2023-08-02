@@ -15,3 +15,5 @@
 - [x] Centered grid
 - [ ] Information, such as Time Elasped
 
+## BASE INTERACTIVITY
+- [x] Clickable Tiles
