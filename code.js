@@ -5,17 +5,19 @@ document.addEventListener("keydown", function onEvent(event) {
 });
 
 let wscreen = document.getElementById("win-screen")
+let grid = document.getElementById("grid")
 let playerPieces = [" ", "X", "O"];
 let selectables = "■□▢▣▤▥▦▧▨▩▪▫▬▭▮▯▰▱▲△▴▵▶▷▸▹►▻▼▽▾▿◀◁◂◃◄◅◆◇◈◉◊○◌◍◎●◐◑◒◓◔◕◖◗◘◙◚◛◜◝◞◟◠◡◢◣◤◥◦◧◨◩◪◫◬◭◮◯◰◱◲◳◴◵◶◷◸◹◺◻◼◽◾◿"
 //The containing class for a game
 class Game {
-    grid = [[0,0,0],[0,0,0],[0,0,0],[0,0,0]]
+    grid = [[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]]
     width = 3;
     height = 3;
     player = 1;
     playerCt = 2;
     pieces = [" ", "X", "O"];
     rowRequire = 3;
+    
     turnCount = 0;
     PlacePiece(x,y) {
         if (this.GetPiece(x,y) !== 0) throw new Error("Board already has a piece there");
@@ -26,9 +28,8 @@ class Game {
         else this.player++;
         let rows = this.CheckForContinousRows(x,y)
         for (let i = 0; i < rows.length; i++) {
-            if(rows[i] >= this.rowRequire) {wscreen.style.display = "block"}
+            if(rows[i] >= this.rowRequire) {wscreen.style.display = "block"; grid.classList.add("disable")}
         }
-        console.log(this.grid)
         return { piece: this.pieces[this.player] }
     };
 
@@ -58,7 +59,7 @@ class Game {
                     yCheck += increments[direction][0] * flipNum;
                     /*console.log(`Checking ${xCheck}, ${yCheck}`)*/
                     //Is this cell NOT in range of the board dimensions?
-                    if( !(inRange(-1,xCheck,4) & inRange(-1,yCheck,4)) ) {/*console.log("Out of range");*/ break;}
+                    if( !(inRange(-1,xCheck,this.width + 1) & inRange(-1,yCheck, this.height + 1)) ) {/*console.log("Out of range");*/ break;}
                     //Is this cell NOT the same piece
                     if( this.GetPiece(xCheck, yCheck) !== playerNum) {/*console.log("Not same piece");*/ break;}
                     fill[direction]++;

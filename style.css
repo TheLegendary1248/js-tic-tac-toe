@@ -7,7 +7,7 @@ html {
     position: fixed;
     width: 100%;
     height: 100%;
-
+    color: #fff;
 }
 body {
     background-color: #111;
@@ -28,6 +28,7 @@ main {
     border-radius: 5px;
 }
 .square {
+    animation: cellStart 1s;
     transition: all 0.5s;
     background-color: #ddd4;
     position: absolute;
@@ -48,6 +49,15 @@ main {
     line-height: 0.9em;
     text-shadow: #222 .05em .05em 0;
 }
+@keyframes cellStart {
+    from { scale: 0; rotate: 90deg;}
+}
+#grid.disable *{
+    pointer-events: none;
+}
+.square.scroll{
+    border-radius: 100%;
+}
 .square:hover, .square:focus{
     background-color: #dddf;
     border-width: 0px;
@@ -58,6 +68,7 @@ main {
 }
 .square.filled {
     pointer-events: none;
+    opacity: .9;
 }
 #win-screen {
     display: none;
@@ -71,4 +82,18 @@ main {
     font-size: 30px;
     padding-bottom: 8px;
     text-shadow: #0004 2px 2px 0px;
+}
+
+#banner {
+    position: absolute;
+    width: 100%;
+    font-size: 40px;
+    translate: 50% 0%;
+    text-align: center;
+    left: -50%;
+    top: -25%;
+    overflow: visible;
+    white-space: nowrap;
+    font-family: sans-serif;
+    text-shadow: #f707 2px 2px 0px, #07f7 -2px -2px 0px;
 }
