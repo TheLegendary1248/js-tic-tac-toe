@@ -10,7 +10,16 @@
 <body>
     
     <div id="game-setup"></div>
-    <div id="prefs"></div>
+    <div id="prefs">
+        <button id="prefs-button" onclick="let p = event.target.parentNode; let w = 'active'; p.classList[(p.classList.contains(w) ? 'remove' : 'add')](w)"></button>
+        <div id="prefs-content">
+            <label>Primary Color</label>
+            <input type="color"></input>
+            <label>Secondary Color</label>
+            <input type="color"></input>
+            <input type="number"></input>
+        </div>
+    </div>
     <div id="win-screen">WINNER</div>
     <main>
         <div id="banner">js-tic-tac-toe</div>
